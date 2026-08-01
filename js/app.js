@@ -74,7 +74,7 @@ const ORDER_KEY = 'aurora_pending_orders_v1';
 let cart = [];
 let allDrinksFlattened = [];
 let currentCheckoutStep = 1;
-let selectedPayment = '信用卡';
+let selectedPayment = '銀行匯款';
 let lastFocused = null;
 
 /* ============================================================
@@ -552,7 +552,7 @@ function startCheckout() {
   ga4_beginCheckout();
 
   currentCheckoutStep = 1;
-  selectedPayment = '信用卡';
+  selectedPayment = '銀行匯款';
   updateCheckoutUI();
   document.getElementById('checkout-final-total').textContent = `NT$ ${cartValue().toLocaleString('zh-TW')}`;
 
@@ -584,27 +584,8 @@ function prevCheckoutStep() {
   }
 }
 
-function selectPayment(type) {
-  selectedPayment = type;
-
-  const cc = document.getElementById('pay-cc');
-  const line = document.getElementById('pay-line');
-
-  [cc, line].forEach(el => {
-    el.classList.remove('border-gold-500', 'bg-gold-900/20');
-    el.classList.add('border-gray-700', 'bg-dark-800');
-    const chk = el.querySelector('.check-icon');
-    if (chk) chk.remove();
-  });
-
-  const sel = type === '信用卡' ? cc : line;
-  sel.classList.remove('border-gray-700', 'bg-dark-800');
-  sel.classList.add('border-gold-500', 'bg-gold-900/20');
-  sel.insertAdjacentHTML('beforeend',
-    '<span class="absolute top-2 right-2 text-gold-500 text-sm check-icon"><i class="fa-solid fa-circle-check"></i></span>');
-  sel.querySelector('input').checked = true;
-
-  ga4_addPaymentInfo(type);
+function normalizeRemittanceLast5(value) {
+  return String(value || '').replace(/\D/g, '').slice(0, 5);
 }
 
 function updateCheckoutUI() {
@@ -623,7 +604,7 @@ function updateCheckoutUI() {
     closeBtn.classList.remove('hidden');
   } else if (currentCheckoutStep === 2) {
     progress.style.width = '100%';
-    title.textContent = '選擇尊榮付款方式';
+    title.textContent = '填寫匯款資料';
     closeBtn.classList.remove('hidden');
   } else {
     title.textContent = '';
@@ -632,13 +613,25 @@ function updateCheckoutUI() {
 }
 
 function completePurchase() {
-  const transactionId = 'LXR_' + Math.random().toString(36).slice(2, 11).toUpperCase();
+  const remittanceInput = document.getElementById('checkout-remittance-last5');
+  const remittanceLast5 = normalizeRemittanceLast5(remittanceInput?.value);
 
+  if (!/^\d{5}$/.test(remittanceLast5)) {
+    if (remittanceInput) {
+      remittanceInput.value = remittanceLast5;
+      remittanceInput.focus();
+    }
+    return showToast('請輸入正確的匯款帳號末五碼（5 位數字）', 'error');
+  }
+
+  const transactionId = 'LXR_' + Math.random().toString(36).slice(2, 11).toUpperCase();
   ga4_purchase(transactionId, selectedPayment);
 
   const order = {
     id: transactionId,
     payment: selectedPayment,
+    remittanceLast5,
+    remittance_last5: remittanceLast5,
     name: document.getElementById('checkout-name').value.trim(),
     phone: document.getElementById('checkout-phone').value.trim(),
     address: document.getElementById('checkout-address').value.trim(),
@@ -651,29 +644,31 @@ function completePurchase() {
   const note = document.getElementById('order-note');
   document.getElementById('order-id').textContent = `訂單編號 ${transactionId}`;
 
-  // 先把畫面切到完成頁，不讓客人等資料庫回應
   note.textContent = navigator.onLine
-    ? '專屬騎士將火速為您送達指定地址'
+    ? '已收到匯款資料，確認款項後將安排製作與配送。'
     : '目前離線，訂單已暫存於裝置，恢復連線後將自動送出。';
 
   currentCheckoutStep = 3;
   updateCheckoutUI();
-
   cart = [];
   updateCartUI();
 
-  // 背景寫入 Supabase；失敗或離線就排入佇列等下次補送
   if (typeof Orders !== 'undefined' && Orders.isConfigured()) {
     Orders.save(order).then(ok => {
       if (!ok) {
         queueOrder(order);
         if (currentCheckoutStep === 3) {
-          note.textContent = '訂單已暫存於裝置，恢復連線後將自動送出。';
+          note.textContent = '訂單暫時未送達資料庫，已保存在裝置中，恢復連線後會自動補送。';
         }
       }
     });
-  } else if (!navigator.onLine) {
+  } else {
     queueOrder(order);
+    if (currentCheckoutStep === 3) {
+      note.textContent = navigator.onLine
+        ? 'Supabase 尚未完成設定，訂單已先保存在裝置中。'
+        : '目前離線，訂單已暫存於裝置，恢復連線後將自動送出。';
+    }
   }
 }
 
@@ -715,7 +710,7 @@ async function flushQueuedOrders() {
   list.forEach(o => {
     gtag('event', 'purchase', {
       transaction_id: o.id, value: o.total, currency: 'TWD',
-      payment_type: o.payment, items: o.items
+      payment_type: o.payment || '銀行匯款', items: o.items
     });
   });
   try { localStorage.removeItem(ORDER_KEY); } catch (e) { /* 忽略 */ }
@@ -724,7 +719,7 @@ async function flushQueuedOrders() {
 
 function finishAndClose() {
   closeCheckout();
-  ['checkout-name', 'checkout-phone', 'checkout-address']
+  ['checkout-name', 'checkout-phone', 'checkout-address', 'checkout-remittance-last5']
     .forEach(id => { document.getElementById(id).value = ''; });
 }
 
@@ -759,3 +754,11 @@ if (document.readyState === 'loading') {
 } else {
   initApp();
 }
+
+
+/* 匯款末五碼：只保留數字並限制 5 碼 */
+document.addEventListener('input', event => {
+  if (event.target?.id === 'checkout-remittance-last5') {
+    event.target.value = normalizeRemittanceLast5(event.target.value);
+  }
+});
