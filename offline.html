@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>離線中 | 極光特調</title>
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="./icons/favicon.svg" type="image/svg+xml">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh; min-height: 100dvh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem 1.5rem;
+    background: #0a0a0a radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0a0a0a 70%);
+    color: #f3f4f6; text-align: center;
+    font-family: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', Arial, sans-serif;
+  }
+  .wrap { max-width: 26rem; }
+  .badge {
+    width: 88px; height: 88px; margin: 0 auto 1.75rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #be701a, #eac56a);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(217, 143, 34, .35);
+  }
+  .badge svg { width: 44px; height: 44px; }
+  h1 {
+    font-size: clamp(1.6rem, 6vw, 2.1rem); font-weight: 900;
+    margin-bottom: .9rem; letter-spacing: .02em;
+    background: linear-gradient(to right, #f2dea3, #d98f22, #f2dea3);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  p { color: #9ca3af; line-height: 1.85; font-size: .95rem; margin-bottom: 2rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .6rem;
+    min-height: 48px; padding: 0 1.9rem;
+    background: linear-gradient(to right, #d98f22, #e3a939);
+    color: #0a0a0a; font-weight: 700; font-size: 1rem;
+    border: none; border-radius: 14px; cursor: pointer;
+    box-shadow: 0 0 22px rgba(217, 143, 34, .35);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 0 32px rgba(217, 143, 34, .55); }
+  .note {
+    margin-top: 2.25rem; padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    font-size: .8rem; color: #6b7280;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="2" stroke-linecap="round">
+        <path d="M1 1l22 22"/>
+        <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+        <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+        <path d="M10.71 5.05A16 16 0 0 1 22.58 9"/>
+        <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+        <path d="M12 20h.01"/>
+      </svg>
+    </div>
+
+    <h1>目前無法連線</h1>
+    <p>
+      看來網路暫時斷線了。<br>
+      恢復連線後即可繼續選購您的專屬特調，<br>
+      購物車內容已為您保留。
+    </p>
+
+    <button class="btn" onclick="location.reload()">
+      重新載入
+    </button>
+
+    <p class="note">極光特調 Aurora Drinks</p>
+  </div>
+
+  <script>
+    window.addEventListener('online', () => location.replace('./index.html'));
+  </script>
+</body>
+</html>

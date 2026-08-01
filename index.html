@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>極光特調 | 頂級網紅飲品專賣</title>
+
+    <!-- SEO -->
+    <meta name="description" content="極光特調 Aurora Drinks — 5 大系列、20 款夢幻網紅特調。嚴選頂級食材，挑戰味蕾與視覺的極致雙重饗宴，線上點單極速外送。">
+    <meta name="keywords" content="極光特調,網紅飲品,特調飲料,手搖飲,外送,奶蓋,冰沙">
+    <meta name="author" content="極光特調 Aurora Drinks">
+    <link rel="canonical" href="./">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="極光特調">
+    <meta property="og:title" content="極光特調 | 頂級網紅飲品專賣">
+    <meta property="og:description" content="5 大系列、20 款夢幻之作。星級特調，點亮您的專屬時刻。">
+    <meta property="og:image" content="./icons/icon-512.png">
+    <meta property="og:locale" content="zh_TW">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- ========== PWA ========== -->
+    <link rel="manifest" href="./manifest.webmanifest">
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="color-scheme" content="dark">
+    <meta name="application-name" content="極光特調">
+
+    <!-- iOS 安裝支援 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="極光特調">
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+    <link rel="icon" href="./icons/favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="./icons/icon-192.png" sizes="192x192" type="image/png">
+    <link rel="mask-icon" href="./icons/favicon.svg" color="#d98f22">
+
+    <!-- Windows 磚 -->
+    <meta name="msapplication-TileColor" content="#0a0a0a">
+    <meta name="msapplication-TileImage" content="./icons/icon-144.png">
+
+    <!-- ========== 樣式 ========== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/fontawesome/all.min.css">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+          media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;900&family=Noto+Sans+TC:wght@300;400;500;700&display=swap">
+    </noscript>
+
+    <!-- ========== GA4 ========== -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-JQEE2PLNR8');
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQEE2PLNR8"></script>
+
+    <!-- 結構化資料 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "極光特調 Aurora Drinks",
+      "servesCuisine": "飲料 / 特調",
+      "priceRange": "NT$190 - NT$320",
+      "acceptsReservations": "False",
+      "url": "./"
+    }
+    </script>
+</head>
+
+<body class="antialiased relative selection:bg-gold-500 selection:text-white">
+
+<a href="#menu-container" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-gold-500 focus:text-dark-900 focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold">跳到菜單</a>
+
+<!-- ══════════════ 導覽列 ══════════════ -->
+<nav class="fixed top-0 w-full z-40 glass-dark shadow-lg" style="padding-top: env(safe-area-inset-top, 0px);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16 md:h-20">
+
+            <a href="#" class="flex items-center gap-2.5 md:gap-3 min-w-0" aria-label="極光特調首頁">
+                <div class="w-9 h-9 md:w-10 md:h-10 shrink-0 rounded-full bg-gradient-to-tr from-gold-600 to-gold-300 flex items-center justify-center text-dark-900 shadow-[0_0_15px_rgba(217,143,34,0.5)]">
+                    <i class="fa-solid fa-crown text-sm md:text-base"></i>
+                </div>
+                <span class="font-serif font-black text-xl md:text-2xl tracking-widest gold-gradient-text truncate">極光特調</span>
+            </a>
+
+            <div class="flex items-center gap-1 sm:gap-3">
+                <!-- 安裝 App 按鈕（可安裝時才顯示） -->
+                <button id="install-btn" type="button" hidden
+                        class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-gold-500/50 bg-gold-500/10 text-gold-300 text-sm font-medium hover:bg-gold-500/20 transition-colors">
+                    <i class="fa-solid fa-download"></i> 安裝 App
+                </button>
+                <button id="install-btn-mobile" type="button" hidden
+                        class="sm:hidden w-11 h-11 rounded-full text-gold-400 hover:text-gold-300 flex items-center justify-center transition-colors"
+                        aria-label="安裝 App">
+                    <i class="fa-solid fa-download text-lg"></i>
+                </button>
+
+                <!-- 購物車 -->
+                <button onclick="openCart()" type="button" aria-label="開啟購物車"
+                        class="relative w-11 h-11 flex items-center justify-center text-gold-400 hover:text-gold-300 transition-colors group">
+                    <i class="fa-solid fa-basket-shopping text-xl md:text-2xl group-hover:scale-110 transition-transform"></i>
+                    <span id="cart-count" aria-live="polite"
+                          class="absolute top-0.5 right-0.5 inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-[11px] font-bold leading-none text-dark-900 bg-gold-400 rounded-full shadow-[0_0_10px_rgba(217,143,34,0.8)]">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ══════════════ 狀態橫幅（離線 / 有更新）══════════════ -->
+<div class="banner-slot" id="banner-slot">
+    <div id="offline-banner" hidden
+         class="flex items-center gap-3 rounded-xl border border-amber-500/40 bg-amber-950/90 backdrop-blur px-4 py-2.5 text-sm text-amber-200 shadow-lg">
+        <i class="fa-solid fa-wifi shrink-0"></i>
+        <span class="flex-1">目前離線中 — 您仍可瀏覽菜單與加入購物車</span>
+    </div>
+
+    <div id="update-banner" hidden
+         class="flex items-center gap-3 rounded-xl border border-gold-500/50 bg-dark-900/95 backdrop-blur px-4 py-2.5 text-sm text-gold-200 shadow-lg">
+        <i class="fa-solid fa-arrows-rotate shrink-0"></i>
+        <span class="flex-1">有新版本可用</span>
+        <button id="update-btn" type="button"
+                class="tap-sm shrink-0 px-3 py-1.5 rounded-lg bg-gold-500 text-dark-900 font-bold text-xs hover:bg-gold-400 transition-colors">立即更新</button>
+    </div>
+</div>
+
+<!-- ══════════════ 主視覺 ══════════════ -->
+<header class="pt-24 md:pt-32 pb-10 md:pb-16 relative overflow-hidden" style="padding-top: calc(6rem + env(safe-area-inset-top, 0px));">
+    <div class="absolute top-16 -left-16 w-64 h-64 bg-gold-600/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 -right-16 w-80 h-80 bg-purple-900/20 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-500/30 bg-gold-500/10 text-gold-300 text-xs sm:text-sm font-medium mb-5 md:mb-6">
+            <i class="fa-solid fa-gem"></i> 網紅指定 ‧ 奢華打卡首選
+        </div>
+
+        <h1 class="fluid-h1 font-black font-serif text-white mb-4 md:mb-6 tracking-tight">
+            星級特調，<br class="sm:hidden"/>點亮您的<span class="gold-gradient-text">專屬時刻</span>
+        </h1>
+
+        <p class="fluid-lead text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10 font-light tracking-wide px-2">
+            5 大系列、20 款夢幻之作。嚴選頂級食材，挑戰味蕾與視覺的極致雙重饗宴。
+        </p>
+
+        <div class="chip-rail hide-scrollbar" id="category-tags">
+            <!-- 分類籤由 JS 產生 -->
+        </div>
+    </div>
+</header>
+
+<!-- ══════════════ 菜單 ══════════════ -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12" id="menu-container">
+    <!-- 商品由 JS 產生 -->
+</main>
+
+<!-- ══════════════ 頁尾 ══════════════ -->
+<footer class="border-t border-gray-800/80 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
+        <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+            <div class="sm:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-gold-600 to-gold-300 flex items-center justify-center text-dark-900">
+                        <i class="fa-solid fa-crown text-sm"></i>
+                    </div>
+                    <span class="font-serif font-black text-xl tracking-widest gold-gradient-text">極光特調</span>
+                </div>
+                <p class="text-gray-500 leading-relaxed max-w-md">
+                    以頂級食材與視覺美學打造的網紅特調專賣店，每一杯都是為社群而生的作品。
+                </p>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-3 text-base">營業資訊</h3>
+                <ul class="space-y-2 text-gray-500">
+                    <li><i class="fa-regular fa-clock w-5 text-gold-500/70"></i> 每日 11:00 – 22:00</li>
+                    <li><i class="fa-solid fa-motorcycle w-5 text-gold-500/70"></i> 外送滿 NT$500 免運</li>
+                    <li><i class="fa-solid fa-location-dot w-5 text-gold-500/70"></i> 全台主要都會區</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-3 text-base">追蹤我們</h3>
+                <div class="flex gap-3">
+                    <a href="#" aria-label="Instagram" class="w-11 h-11 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-500/50 transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook" class="w-11 h-11 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-500/50 transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LINE" class="w-11 h-11 rounded-full border border-gray-700 flex items-center justify-center text-gray-400 hover:text-gold-400 hover:border-gold-500/50 transition-colors"><i class="fa-brands fa-line"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-10 pt-6 border-t border-gray-800/60 flex flex-col sm:flex-row justify-between gap-3 text-xs text-gray-600">
+            <span>© <span id="year">2026</span> 極光特調 Aurora Drinks. Demo 展示用途。</span>
+            <span id="app-mode-label"></span>
+        </div>
+    </div>
+</footer>
+
+<!-- ══════════════ 手機底部快捷列 ══════════════ -->
+<div id="mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 glass-bar px-4 pt-3 md:hidden">
+    <button onclick="openCart()" type="button"
+            class="w-full flex items-center justify-between gap-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 font-bold px-5 py-3.5 rounded-2xl shadow-[0_0_20px_rgba(217,143,34,0.35)] active:scale-[.98] transition-transform">
+        <span class="flex items-center gap-2.5">
+            <i class="fa-solid fa-basket-shopping"></i>
+            <span id="mobile-bar-count">0 項商品</span>
+        </span>
+        <span class="flex items-center gap-2">
+            <span id="mobile-bar-total" class="text-lg font-black">NT$ 0</span>
+            <i class="fa-solid fa-chevron-right text-sm opacity-70"></i>
+        </span>
+    </button>
+</div>
+
+<!-- ══════════════ 購物車 ══════════════ -->
+<div id="cart-overlay" class="fixed inset-0 bg-black/80 z-50 hidden opacity-0 transition-opacity duration-300 backdrop-blur-sm" onclick="closeCart()"></div>
+
+<aside id="cart-sidebar" role="dialog" aria-label="購物車" aria-modal="true"
+       class="fixed top-0 right-0 w-full sm:w-[420px] lg:w-[450px] bg-dark-900 border-l border-gray-800 z-50 transform translate-x-full transition-transform duration-300 shadow-2xl flex flex-col">
+
+    <div class="p-4 sm:p-6 border-b border-gray-800 flex justify-between items-center bg-dark-950 shrink-0"
+         style="padding-top: calc(1rem + env(safe-area-inset-top, 0px));">
+        <h2 class="text-lg sm:text-xl font-serif font-bold text-white flex items-center gap-3">
+            <i class="fa-solid fa-basket-shopping text-gold-500"></i> 專屬購物車
+        </h2>
+        <button onclick="closeCart()" type="button" aria-label="關閉購物車"
+                class="w-11 h-11 flex items-center justify-center text-gray-500 hover:text-white transition-colors rounded-full hover:bg-gray-800">
+            <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+    </div>
+
+    <div id="cart-items" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4 custom-scrollbar">
+        <div class="text-center text-gray-600 mt-16 sm:mt-20 flex flex-col items-center" id="empty-cart-msg">
+            <div class="w-20 h-20 rounded-full bg-dark-800 flex items-center justify-center mb-4 border border-gray-800">
+                <i class="fa-solid fa-wine-glass-empty text-3xl text-gray-500"></i>
+            </div>
+            <p class="text-lg font-medium">購物車尚無特調</p>
+            <p class="text-sm mt-2 text-gray-500">快去挑選您的專屬飲品吧</p>
+        </div>
+    </div>
+
+    <div class="p-4 sm:p-6 border-t border-gray-800 bg-dark-950 shrink-0">
+        <div class="flex justify-between items-end mb-4 sm:mb-6">
+            <span class="text-gray-400 font-medium text-sm sm:text-base">總計金額</span>
+            <span id="cart-total" class="text-2xl sm:text-3xl font-black gold-gradient-text tracking-wider">NT$ 0</span>
+        </div>
+        <button onclick="startCheckout()" type="button" id="checkout-btn" disabled
+                class="w-full bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 font-bold text-base sm:text-lg py-4 rounded-xl shadow-[0_0_15px_rgba(217,143,34,0.3)] hover:shadow-[0_0_25px_rgba(217,143,34,0.6)] transition-all transform hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none flex justify-center items-center gap-2">
+            前往結帳 <i class="fa-solid fa-arrow-right"></i>
+        </button>
+    </div>
+</aside>
+
+<!-- ══════════════ 結帳流程 ══════════════ -->
+<div id="checkout-modal" class="sheet" role="dialog" aria-modal="true" aria-labelledby="checkout-title">
+    <div class="sheet__backdrop" onclick="closeCheckout()"></div>
+    <div class="sheet__panel">
+        <div class="sheet__grip"></div>
+
+        <div class="flex h-1 bg-gray-800 shrink-0">
+            <div id="checkout-progress" class="w-1/2 bg-gradient-to-r from-gold-600 to-gold-400 transition-all duration-500 relative">
+                <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full shadow-[0_0_5px_#fff]"></div>
+            </div>
+        </div>
+
+        <div class="px-5 sm:px-6 py-4 border-b border-gray-800 flex justify-between items-center bg-dark-950 shrink-0">
+            <h2 class="text-xl sm:text-2xl font-serif font-bold text-white" id="checkout-title">填寫配送資訊</h2>
+            <button onclick="closeCheckout()" type="button" id="checkout-close-btn" aria-label="關閉"
+                    class="w-11 h-11 -mr-3 flex items-center justify-center text-gray-500 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <div class="px-5 sm:px-6 py-5 overflow-y-auto custom-scrollbar" id="checkout-content">
+
+            <!-- 步驟 1 -->
+            <div id="checkout-step-1">
+                <div class="space-y-4">
+                    <div>
+                        <label for="checkout-name" class="block text-sm font-medium text-gray-400 mb-1.5"><i class="fa-regular fa-user mr-1 text-gold-500"></i> 收件人姓名</label>
+                        <input id="checkout-name" type="text" autocomplete="name" placeholder="請輸入姓名"
+                               class="w-full px-4 py-3.5 border border-gray-700 rounded-xl focus:ring-2 focus:ring-gold-500 focus:border-gold-500 bg-dark-800 text-white transition-colors">
+                    </div>
+                    <div>
+                        <label for="checkout-phone" class="block text-sm font-medium text-gray-400 mb-1.5"><i class="fa-solid fa-mobile-screen mr-1 text-gold-500"></i> 聯絡電話</label>
+                        <input id="checkout-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="09xx-xxx-xxx"
+                               class="w-full px-4 py-3.5 border border-gray-700 rounded-xl focus:ring-2 focus:ring-gold-500 focus:border-gold-500 bg-dark-800 text-white transition-colors">
+                    </div>
+                    <div>
+                        <label for="checkout-address" class="block text-sm font-medium text-gray-400 mb-1.5"><i class="fa-solid fa-location-dot mr-1 text-gold-500"></i> 外送地址</label>
+                        <input id="checkout-address" type="text" autocomplete="street-address" placeholder="請輸入完整外送地址（例：台北市信義區…）"
+                               class="w-full px-4 py-3.5 border border-gray-700 rounded-xl focus:ring-2 focus:ring-gold-500 focus:border-gold-500 bg-dark-800 text-white transition-colors">
+                    </div>
+                </div>
+                <button onclick="nextCheckoutStep()" type="button"
+                        class="w-full bg-gold-500 text-dark-900 font-bold py-4 rounded-xl mt-7 hover:bg-gold-400 transition-colors shadow-[0_0_15px_rgba(217,143,34,0.3)] text-base sm:text-lg">
+                    下一步：付款方式
+                </button>
+            </div>
+
+            <!-- 步驟 2 -->
+            <div id="checkout-step-2" class="hidden">
+                <div class="space-y-5">
+                    <div>
+                        <span class="block text-sm font-medium text-gray-400 mb-3">選擇尊榮付款方式</span>
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                            <label id="pay-cc" onclick="selectPayment('信用卡')"
+                                   class="border-2 border-gold-500 bg-gold-900/20 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer relative transition-all">
+                                <input type="radio" name="payment" class="absolute opacity-0" checked>
+                                <i class="fa-regular fa-credit-card text-2xl sm:text-3xl text-gold-400 mb-2"></i>
+                                <span class="text-sm font-bold text-white">信用卡</span>
+                                <span class="absolute top-2 right-2 text-gold-500 text-sm check-icon"><i class="fa-solid fa-circle-check"></i></span>
+                            </label>
+                            <label id="pay-line" onclick="selectPayment('LINE Pay')"
+                                   class="border-2 border-gray-700 hover:border-gray-600 bg-dark-800 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all relative">
+                                <input type="radio" name="payment" class="absolute opacity-0">
+                                <i class="fa-brands fa-line text-2xl sm:text-3xl text-[#00B900] mb-2"></i>
+                                <span class="text-sm font-bold text-gray-300">LINE Pay</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="bg-dark-800 p-5 rounded-xl text-center border border-gray-700 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-16 h-16 bg-gold-500/10 rounded-bl-full"></div>
+                        <p class="text-sm text-gray-400 mb-1">本次結帳總額</p>
+                        <div class="font-black text-2xl sm:text-3xl text-white" id="checkout-final-total">NT$ 0</div>
+                    </div>
+                </div>
+                <div class="flex gap-3 sm:gap-4 mt-7">
+                    <button onclick="prevCheckoutStep()" type="button"
+                            class="w-1/3 border border-gray-600 text-gray-300 font-bold py-3.5 rounded-xl hover:bg-gray-800 transition-colors text-sm sm:text-base">
+                        返回修改
+                    </button>
+                    <button onclick="completePurchase()" type="button"
+                            class="w-2/3 bg-gold-500 text-dark-900 font-bold py-3.5 rounded-xl shadow-[0_0_15px_rgba(217,143,34,0.4)] hover:shadow-[0_0_25px_rgba(217,143,34,0.6)] transition-all text-base sm:text-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-lock text-sm"></i> 確認付款
+                    </button>
+                </div>
+            </div>
+
+            <!-- 步驟 3 -->
+            <div id="checkout-step-3" class="hidden text-center py-6 sm:py-10 px-2 relative">
+                <div class="relative h-28 sm:h-32 mb-6 overflow-hidden flex justify-center items-center w-full border-b border-gray-800/50 pb-4">
+                    <div class="wind-line w-12 top-6 left-1/4" style="animation-delay:.1s"></div>
+                    <div class="wind-line w-24 top-16 left-1/3" style="animation-delay:.4s"></div>
+                    <div class="wind-line w-16 top-24 left-1/2" style="animation-delay:.2s"></div>
+                    <div class="scooter-wrapper relative z-10">
+                        <div class="scooter-icon text-gold-400 drop-shadow-[0_0_15px_rgba(217,143,34,0.6)]">
+                            <i class="fa-solid fa-motorcycle text-5xl sm:text-7xl"></i>
+                        </div>
+                        <div class="absolute bottom-2 -left-4 w-3 h-3 bg-gray-500 rounded-full opacity-50 animate-ping" style="animation-duration:.8s"></div>
+                        <div class="absolute bottom-4 -left-8 w-2 h-2 bg-gray-600 rounded-full opacity-30 animate-ping" style="animation-duration:1s;animation-delay:.3s"></div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl sm:text-3xl font-black font-serif mb-4 gold-gradient-text">訂單已送出</h3>
+                <div class="bg-dark-800 rounded-xl p-4 mb-4 border border-gray-800 inline-block max-w-full">
+                    <p class="text-white font-medium text-base sm:text-lg mb-1 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-blender text-gold-500 animate-pulse"></i> 奢華特調精心調製中…
+                    </p>
+                    <p class="text-sm text-gray-400 mt-2" id="order-note">專屬騎士將火速為您送達指定地址</p>
+                    <p class="text-xs text-gray-600 mt-3 tracking-widest" id="order-id"></p>
+                </div>
+
+                <button onclick="finishAndClose()" type="button"
+                        class="w-full bg-transparent border-2 border-gold-500 text-gold-400 font-bold py-3.5 rounded-xl hover:bg-gold-500 hover:text-dark-900 transition-all text-base sm:text-lg mt-3">
+                    繼續探索菜單
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ 商品詳情 ══════════════ -->
+<div id="product-modal" class="sheet sheet--wide" role="dialog" aria-modal="true">
+    <div class="sheet__backdrop" onclick="closeProductModal()"></div>
+    <div class="sheet__panel">
+        <div class="sheet__grip"></div>
+        <div id="product-modal-content" class="overflow-y-auto custom-scrollbar md:overflow-visible">
+            <!-- 由 JS 產生 -->
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════ iOS 安裝提示 ══════════════ -->
+<div id="ios-hint" hidden
+     class="fixed bottom-24 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[75] bg-dark-900 border border-gold-500/40 rounded-2xl p-4 shadow-2xl">
+    <button id="ios-hint-close" type="button" aria-label="關閉"
+            class="absolute top-2 right-2 w-9 h-9 flex items-center justify-center text-gray-500 hover:text-white">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <p class="text-gold-300 font-bold mb-1.5 flex items-center gap-2 text-sm">
+        <i class="fa-solid fa-mobile-screen-button"></i> 安裝到主畫面
+    </p>
+    <p class="text-sm text-gray-400 leading-relaxed pr-6">
+        點下方的分享鍵 <i class="fa-solid fa-arrow-up-from-bracket text-gold-400 mx-0.5"></i>，
+        再選擇「加入主畫面」即可像 App 一樣使用。
+    </p>
+</div>
+
+<!-- ══════════════ Toast ══════════════ -->
+<div id="toast-container" aria-live="polite"
+     class="fixed bottom-24 md:bottom-6 left-4 right-4 md:left-auto md:right-6 md:max-w-sm z-[80] flex flex-col gap-2 pointer-events-none"></div>
+
+<!-- Supabase：先讀設定，再載入包裝模組（函式庫本身有設定才會延遲載入） -->
+<script src="./js/supabase-config.js"></script>
+<script src="./js/supabase.js"></script>
+
+<script src="./js/app.js"></script>
+<script src="./js/pwa.js"></script>
+</body>
+</html>
