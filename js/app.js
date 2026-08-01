@@ -87,11 +87,40 @@ function esc(str) {
   ));
 }
 
-/** 商品圖路徑：1–10 為 png，11 起為 jpg */
+/**
+ * 商品 ID 與圖片檔名固定對照。
+ * 圖片全部放在 ./picture/，檔名為 01.png～20.png。
+ */
+const PRODUCT_IMAGE_BY_ID = Object.freeze({
+  1:  '01.png', // 紫晶星河葡萄氣泡飲
+  2:  '05.png', // 龍王藍柑橘冰茶
+  3:  '06.png', // 熔岩草莓香檳冰飲
+  4:  '14.png', // 火焰紅寶石石榴氣泡飲
+
+  5:  '02.png', // 翡翠麝香青提雪霜
+  6:  '03.png', // 鎏金雲頂白桃奶蓋
+  7:  '12.png', // 黃金鳳凰芒果雲霜
+  8:  '19.png', // 紫藤花園白葡萄奶霜
+
+  9:  '04.png', // 伯爵金箔海鹽奶霜
+  10: '08.png', // 玫瑰珍珠極光歐蕾
+  11: '09.png', // 櫻花琥珀燕窩奶茶
+  12: '13.png', // 人魚之淚海洋椰奶
+
+  13: '07.png', // 黑鑽松露可可冰沙
+  14: '10.png', // 焦糖火山布蕾拿鐵
+  15: '18.png', // 焦糖太陽蛋布丁奶茶
+  16: '20.png', // 帝王榴槤金磚奶昔
+
+  17: '11.png', // 月蝕黑曜石荔枝冰茶
+  18: '15.png', // 銀河棉花糖藍莓歐蕾
+  19: '16.png', // 女王皇冠莓果紅茶
+  20: '17.png'  // 極地鑽石薄荷冰沙
+});
+
 function getImagePath(id) {
-  return id <= 10
-    ? `./picture/${String(id).padStart(2, '0')}.png`
-    : `./picture/${id}.jpg`;
+  const filename = PRODUCT_IMAGE_BY_ID[Number(id)];
+  return filename ? `./picture/${filename}` : '';
 }
 
 /** 產生本地 SVG 佔位圖（離線也能顯示，不依賴外部服務） */
