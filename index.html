@@ -309,7 +309,7 @@
                 </div>
                 <button onclick="nextCheckoutStep()" type="button"
                         class="w-full bg-gold-500 text-dark-900 font-bold py-4 rounded-xl mt-7 hover:bg-gold-400 transition-colors shadow-[0_0_15px_rgba(217,143,34,0.3)] text-base sm:text-lg">
-                    下一步：付款方式
+                    下一步：匯款資料
                 </button>
             </div>
 
@@ -317,22 +317,21 @@
             <div id="checkout-step-2" class="hidden">
                 <div class="space-y-5">
                     <div>
-                        <span class="block text-sm font-medium text-gray-400 mb-3">選擇尊榮付款方式</span>
-                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
-                            <label id="pay-cc" onclick="selectPayment('信用卡')"
-                                   class="border-2 border-gold-500 bg-gold-900/20 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer relative transition-all">
-                                <input type="radio" name="payment" class="absolute opacity-0" checked>
-                                <i class="fa-regular fa-credit-card text-2xl sm:text-3xl text-gold-400 mb-2"></i>
-                                <span class="text-sm font-bold text-white">信用卡</span>
-                                <span class="absolute top-2 right-2 text-gold-500 text-sm check-icon"><i class="fa-solid fa-circle-check"></i></span>
-                            </label>
-                            <label id="pay-line" onclick="selectPayment('LINE Pay')"
-                                   class="border-2 border-gray-700 hover:border-gray-600 bg-dark-800 rounded-xl p-4 flex flex-col items-center justify-center cursor-pointer transition-all relative">
-                                <input type="radio" name="payment" class="absolute opacity-0">
-                                <i class="fa-brands fa-line text-2xl sm:text-3xl text-[#00B900] mb-2"></i>
-                                <span class="text-sm font-bold text-gray-300">LINE Pay</span>
-                            </label>
-                        </div>
+                        <label for="checkout-remittance-last5" class="block text-sm font-medium text-gray-400 mb-1.5">
+                            <i class="fa-solid fa-building-columns mr-1 text-gold-500"></i> 匯款帳號末五碼
+                        </label>
+                        <input id="checkout-remittance-last5"
+                               type="text"
+                               inputmode="numeric"
+                               pattern="[0-9]{5}"
+                               maxlength="5"
+                               autocomplete="off"
+                               placeholder="請輸入 5 位數字，例如 12345"
+                               aria-describedby="remittance-help"
+                               class="w-full px-4 py-3.5 border border-gray-700 rounded-xl focus:ring-2 focus:ring-gold-500 focus:border-gold-500 bg-dark-800 text-white tracking-[0.35em] text-center text-lg font-bold transition-colors">
+                        <p id="remittance-help" class="text-xs text-gray-500 mt-2 leading-relaxed">
+                            完成銀行匯款後，請輸入匯款帳號末五碼，方便核對款項。
+                        </p>
                     </div>
                     <div class="bg-dark-800 p-5 rounded-xl text-center border border-gray-700 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-16 h-16 bg-gold-500/10 rounded-bl-full"></div>
@@ -347,7 +346,7 @@
                     </button>
                     <button onclick="completePurchase()" type="button"
                             class="w-2/3 bg-gold-500 text-dark-900 font-bold py-3.5 rounded-xl shadow-[0_0_15px_rgba(217,143,34,0.4)] hover:shadow-[0_0_25px_rgba(217,143,34,0.6)] transition-all text-base sm:text-lg flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-lock text-sm"></i> 確認付款
+                        <i class="fa-solid fa-paper-plane text-sm"></i> 送出訂單
                     </button>
                 </div>
             </div>
@@ -422,118 +421,7 @@
 
 <script src="./js/app.js"></script>
 
-<!-- 圖片路徑修正：商品依序讀取 picture/01.png、02.png、03.png… -->
-<script>
-(() => {
-  'use strict';
-
-  const PICTURE_DIR = './picture/';
-  const menu = document.getElementById('menu-container');
-  const productModal = document.getElementById('product-modal-content');
-  let activeProductIndex = null;
-
-  const picturePath = (index) =>
-    `${PICTURE_DIR}${String(index).padStart(2, '0')}.png`;
-
-  function setImageSource(img, index) {
-    if (!(img instanceof HTMLImageElement) || index < 1) return;
-
-    const path = picturePath(index);
-    img.dataset.pictureNumber = String(index);
-    img.src = path;
-
-    // 若原本使用 <picture><source>，同步覆蓋 srcset。
-    const picture = img.closest('picture');
-    if (picture) {
-      picture.querySelectorAll('source').forEach((source) => {
-        source.srcset = path;
-      });
-    }
-  }
-
-  function getMenuImages() {
-    if (!menu) return [];
-    return Array.from(menu.querySelectorAll('img')).filter((img) =>
-      !img.matches('[data-ignore-product-image], .icon, .logo')
-    );
-  }
-
-  function fixMenuImages() {
-    getMenuImages().forEach((img, index) => {
-      const number = index + 1;
-      if (img.dataset.pictureNumber !== String(number)) {
-        setImageSource(img, number);
-      }
-    });
-  }
-
-  function findClickedProductIndex(target) {
-    const images = getMenuImages();
-    let node = target instanceof Element ? target : target?.parentElement;
-
-    while (node && node !== menu) {
-      const img = node.matches?.('img') ? node : node.querySelector?.('img');
-      if (img) {
-        const index = images.indexOf(img);
-        if (index >= 0) return index + 1;
-      }
-      node = node.parentElement;
-    }
-    return null;
-  }
-
-  function fixModalImages() {
-    if (!productModal || !activeProductIndex) return;
-    productModal.querySelectorAll('img').forEach((img) => {
-      if (img.dataset.pictureNumber !== String(activeProductIndex)) {
-        setImageSource(img, activeProductIndex);
-      }
-    });
-  }
-
-  fixMenuImages();
-
-  document.addEventListener('DOMContentLoaded', () => {
-    fixMenuImages();
-    fixModalImages();
-  });
-
-  menu?.addEventListener('click', (event) => {
-    const index = findClickedProductIndex(event.target);
-    if (index) {
-      activeProductIndex = index;
-      requestAnimationFrame(fixModalImages);
-      setTimeout(fixModalImages, 0);
-    }
-  }, true);
-
-  const observer = new MutationObserver(() => {
-    fixMenuImages();
-    fixModalImages();
-  });
-
-  if (menu) observer.observe(menu, { childList: true, subtree: true });
-  if (productModal) observer.observe(productModal, { childList: true, subtree: true });
-
-  document.addEventListener('error', (event) => {
-    const img = event.target;
-    if (!(img instanceof HTMLImageElement)) return;
-
-    const menuImages = getMenuImages();
-    const menuIndex = menuImages.indexOf(img);
-    const index = menuIndex >= 0
-      ? menuIndex + 1
-      : productModal?.contains(img)
-        ? activeProductIndex
-        : null;
-
-    if (index) {
-      const expected = picturePath(index);
-      console.error(`找不到商品圖片：${expected}`);
-    }
-  }, true);
-})();
-</script>
+<!-- 商品圖片由 ./js/app.js 的商品資料決定，避免名稱與圖片因畫面排序而錯位 -->
 
 <script src="./js/pwa.js"></script>
 </body>
