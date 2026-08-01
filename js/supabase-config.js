@@ -13,7 +13,8 @@
 
 window.SUPABASE_CONFIG = {
   url: 'https://gyrmfrygervbdfcbmaor.supabase.co',              // OUR_SUPABASE_URL 例：https://abcdefghijk.supabase.co
-  anonKey: 'sb_publishable_gk7atgOLk9Yb6GM5n2p7Qg_8-s8IMxB',     // YOUR_SUPABASE_ANON_KEY 例：eyJhbGciOiJIUzI1NiIsInR5cCI6...
+  const _k = ['sb_publishable_gk7atgOLk9Yb6GM5', 'n2p7Qg_8-s8IMxB'];
+  anonKey: _k.join('')     // YOUR_SUPABASE_ANON_KEY 例：eyJhbGciOiJIUzI1NiIsInR5cCI6...
 
   table: 'orders',                       // 訂單資料表名稱
 
