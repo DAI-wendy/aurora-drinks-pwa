@@ -410,6 +410,120 @@
 <script src="./js/supabase.js"></script>
 
 <script src="./js/app.js"></script>
+
+<!-- 圖片路徑修正：商品依序讀取 picture/01.png、02.png、03.png… -->
+<script>
+(() => {
+  'use strict';
+
+  const PICTURE_DIR = './picture/';
+  const menu = document.getElementById('menu-container');
+  const productModal = document.getElementById('product-modal-content');
+  let activeProductIndex = null;
+
+  const picturePath = (index) =>
+    `${PICTURE_DIR}${String(index).padStart(2, '0')}.png`;
+
+  function setImageSource(img, index) {
+    if (!(img instanceof HTMLImageElement) || index < 1) return;
+
+    const path = picturePath(index);
+    img.dataset.pictureNumber = String(index);
+    img.src = path;
+
+    // 若原本使用 <picture><source>，同步覆蓋 srcset。
+    const picture = img.closest('picture');
+    if (picture) {
+      picture.querySelectorAll('source').forEach((source) => {
+        source.srcset = path;
+      });
+    }
+  }
+
+  function getMenuImages() {
+    if (!menu) return [];
+    return Array.from(menu.querySelectorAll('img')).filter((img) =>
+      !img.matches('[data-ignore-product-image], .icon, .logo')
+    );
+  }
+
+  function fixMenuImages() {
+    getMenuImages().forEach((img, index) => {
+      const number = index + 1;
+      if (img.dataset.pictureNumber !== String(number)) {
+        setImageSource(img, number);
+      }
+    });
+  }
+
+  function findClickedProductIndex(target) {
+    const images = getMenuImages();
+    let node = target instanceof Element ? target : target?.parentElement;
+
+    while (node && node !== menu) {
+      const img = node.matches?.('img') ? node : node.querySelector?.('img');
+      if (img) {
+        const index = images.indexOf(img);
+        if (index >= 0) return index + 1;
+      }
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  function fixModalImages() {
+    if (!productModal || !activeProductIndex) return;
+    productModal.querySelectorAll('img').forEach((img) => {
+      if (img.dataset.pictureNumber !== String(activeProductIndex)) {
+        setImageSource(img, activeProductIndex);
+      }
+    });
+  }
+
+  fixMenuImages();
+
+  document.addEventListener('DOMContentLoaded', () => {
+    fixMenuImages();
+    fixModalImages();
+  });
+
+  menu?.addEventListener('click', (event) => {
+    const index = findClickedProductIndex(event.target);
+    if (index) {
+      activeProductIndex = index;
+      requestAnimationFrame(fixModalImages);
+      setTimeout(fixModalImages, 0);
+    }
+  }, true);
+
+  const observer = new MutationObserver(() => {
+    fixMenuImages();
+    fixModalImages();
+  });
+
+  if (menu) observer.observe(menu, { childList: true, subtree: true });
+  if (productModal) observer.observe(productModal, { childList: true, subtree: true });
+
+  document.addEventListener('error', (event) => {
+    const img = event.target;
+    if (!(img instanceof HTMLImageElement)) return;
+
+    const menuImages = getMenuImages();
+    const menuIndex = menuImages.indexOf(img);
+    const index = menuIndex >= 0
+      ? menuIndex + 1
+      : productModal?.contains(img)
+        ? activeProductIndex
+        : null;
+
+    if (index) {
+      const expected = picturePath(index);
+      console.error(`找不到商品圖片：${expected}`);
+    }
+  }, true);
+})();
+</script>
+
 <script src="./js/pwa.js"></script>
 </body>
 </html>
